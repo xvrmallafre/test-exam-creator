@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json.schemastore.org/web-manifest-combined.json",
+  "name": "Test exam creator",
+  "short_name": "Create your exam",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#fff",
+  "description": "A webapp to create your type test exam"
+}
