@@ -29,9 +29,7 @@ export default component$(() => {
   return (
     <>
       <Header />
-      <main>
-        <Slot />
-      </main>
+      <Slot />
       <Footer />
     </>
   );
