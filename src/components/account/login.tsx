@@ -1,27 +1,29 @@
 import { component$, useStylesScoped$ } from "@builder.io/qwik";
-import styles from './login.css?inline';
+import { Form } from "@builder.io/qwik-city";
 
-export const LoginForm = component$(() => {
+import styles from './auth.css?inline';
+
+interface LoginFormProps {
+    formAction: any;
+}
+
+export const LoginForm = component$(({ formAction }: LoginFormProps) => {
 
     useStylesScoped$(styles);
 
     return (
-        <form class="login-form">
+        <Form class="login-form" action={formAction}>
             <div class="relative">
-                <input name="email" type="text" placeholder="Usuario" />
-                <label for="email">Usuario</label>
+                <input id="username" name="username" type="text" placeholder="Usuario" autoComplete={'username'} />
+                <label for="username">Usuario</label>
             </div>
             <div class="relative">
                 <input id="password" name="password" type="password" placeholder="Contraseña" />
                 <label for="password">Contraseña</label>
             </div>
             <div class="relative">
-                <button>Acceder</button>
+                <button type="submit">Acceder</button>
             </div>
-            {/* <code>
-                { JSON.stringify( formState, undefined , 2 ) }
-            </code> */}
-        </form>
+        </Form>
     )
-
 });

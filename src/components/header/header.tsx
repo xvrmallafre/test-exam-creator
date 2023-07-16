@@ -8,21 +8,21 @@ export default component$(() => {
       <div class={["container", styles.wrapper]}>
         <div class={styles.logo}>
           <a href="/" title="qwik">
-            <QwikLogo height={50} width={143} />
+            <QwikLogo width={90} />
           </a>
         </div>
-        {/* <ul>
+        <ul>
           <li>
-            <a href="#">
-              Sign In
+            <a href="/login/">
+              Iniciar sesión
             </a>
           </li>
           <li>
-            <a href="#">
-              Sign Up
+            <a href="/register/">
+              Registrarse
             </a>
           </li>
-        </ul> */}
+        </ul>
       </div>
     </header>
   );

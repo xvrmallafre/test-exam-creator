@@ -21,3 +21,11 @@
 h1.login-title {
     @apply text-3xl font-bold text-center text-gray-800;
 }
+
+.message.success h3 {
+    @apply text-sm text-green-600;
+}
+
+.message.error h3 {
+    @apply text-sm text-red-800;
+}	

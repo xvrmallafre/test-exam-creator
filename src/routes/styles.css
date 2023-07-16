@@ -74,7 +74,7 @@ ul {
 /* CONTAINER ------------------------------------ */
 .container {
   margin: 0 auto;
-  padding: 30px 40px;
+  padding: 15px 20px;
 }
 .container.container-purple {
   background: var(--qwik-light-purple);
@@ -95,7 +95,7 @@ ul {
 
 @media screen and (min-width: 768px) {
   .container {
-    padding: 25px 50px;
+    padding: 15px 20px;
   }
   .container.container-spacing-xl {
     padding: 100px 60px;
