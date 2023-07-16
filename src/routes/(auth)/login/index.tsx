@@ -36,6 +36,10 @@ export default component$(() => {
   //TODO:
   //TODO: A possible solution to this, is create the form from an object, and then 
   //TODO: iterate over the object to show the errors under the field itself.
+  //TODO:
+  //TODO: Instead of creating a success message, we should redirect to the home page
+  //TODO: and in the header, should disappear the login and register buttons, and show
+  //TODO: new menu items, a button to go to the user profile, and a button to logout.
 
   return (
     <>
