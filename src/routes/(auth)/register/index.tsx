@@ -1,6 +1,8 @@
 import { component$, useStylesScoped$ } from "@builder.io/qwik";
 import { type DocumentHead, routeAction$, zod$ } from "@builder.io/qwik-city";
+
 import { PrismaClient } from "@prisma/client";
+import bcrypt from "bcrypt";
 
 import { RegisterForm } from "~/components/account/register";
 import styles from "../auth-layout.css?inline";
@@ -8,15 +10,18 @@ import styles from "../auth-layout.css?inline";
 export const useCreateUser = routeAction$(
   async (data) => {
     const prisma = new PrismaClient();
+    const hashedPassword = bcrypt.hashSync(data.password, 5);
     const user = await prisma.user.create({
       data: {
-        name: data.name,
-        lastname: data.lastname,
+        name: data.name.trim(),
+        lastname: data.lastname?.trim(),
         username: data.username.toLowerCase(),
-        email: data.email,
-        password: data.password,
+        email: data.email.trim(),
+        password: hashedPassword,
       }
     });
+
+    prisma.$disconnect();
     return user;
   },
   zod$((z) => {
@@ -37,6 +42,8 @@ export const useCreateUser = routeAction$(
           username: data.username.toLowerCase()
         }
       });
+
+      prisma.$disconnect();
       return !user;
     }, { message: "El nombre de usuario ya existe" }
     ).refine(async (data) => {
@@ -46,6 +53,8 @@ export const useCreateUser = routeAction$(
           email: data.email
         }
       });
+      
+      prisma.$disconnect();
       return !user;
     }, { message: "El correo electrónico ya existe" });
 

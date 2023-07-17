@@ -1,13 +1,39 @@
 import { component$, useStylesScoped$ } from "@builder.io/qwik";
 import { type DocumentHead, routeAction$, zod$ } from "@builder.io/qwik-city";
-import { PrismaClient } from "@prisma/client";
 
+import { PrismaClient } from "@prisma/client";
+import bcrypt from "bcrypt";
+
+import { setUser, isLoggedIn, getUser } from "~/helpers/user";
 import { LoginForm } from "~/components/account/login";
 import styles from "../auth-layout.css?inline";
 
 export const useLogin = routeAction$(
-  () => {
-    return;
+  ( data, { redirect } ) => {
+
+    console.log(getUser());
+
+    if (isLoggedIn()) {
+      redirect(301, "/");
+    } else {
+      const prisma = new PrismaClient();
+      const userData = prisma.user.findUnique({
+        where: {
+          username: data.username,
+        },
+        select: {
+          id: true,
+          username: true,
+          name: true,
+          lastname: true,
+          email: true,
+        }
+      });
+
+      prisma.$disconnect();
+      setUser(userData);
+      redirect(301, "/");
+    }
   },
   zod$((z) => {
     return z.object({
@@ -15,13 +41,22 @@ export const useLogin = routeAction$(
       password: z.string().min(8),
     }).refine(async (data) => {
       const prisma = new PrismaClient();
-      const user = await prisma.user.findUnique({
+      const userPassword = await prisma.user.findUnique({
         where: {
           username: data.username.toString(),
-          password: data.password.toString(),
+        },
+        select: {
+          password: true,
         }
       });
-      return !!user;
+
+      if (!userPassword) {
+        return false;
+      }
+      
+      prisma.$disconnect();
+
+      return bcrypt.compareSync(data.password.toString(), userPassword.password);
     }, { message: "Usuario o contraseña incorrectos" });
   })
 );

@@ -15,7 +15,7 @@
 }
 
 .login-content {
-    @apply divide-y divide-gray-200;
+    @apply divide-y divide-gray-200 max-w-[250px];
 }
 
 h1.login-title {
