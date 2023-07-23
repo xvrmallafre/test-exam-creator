@@ -15,11 +15,9 @@ export const LoginForm = component$(({ formAction }: LoginFormProps) => {
         <Form class="login-form" action={formAction}>
             <div class="relative">
                 <input id="username" name="username" type="text" placeholder="Usuario" autoComplete={'username'} />
-                <label for="username">Usuario</label>
             </div>
             <div class="relative">
                 <input id="password" name="password" type="password" placeholder="Contraseña" />
-                <label for="password">Contraseña</label>
             </div>
             <div class="relative">
                 <button type="submit">Acceder</button>

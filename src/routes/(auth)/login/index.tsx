@@ -1,37 +1,19 @@
 import { component$, useStylesScoped$ } from "@builder.io/qwik";
 import { type DocumentHead, routeAction$, zod$ } from "@builder.io/qwik-city";
 
-import { PrismaClient } from "@prisma/client";
-import bcrypt from "bcrypt";
+//import { useAuthSignin } from '~/routes/plugin@auth';
 
-import { setUser, isLoggedIn, getUser } from "~/helpers/user";
+import { getUserFromCredentials } from "~/helpers/user";
 import { LoginForm } from "~/components/account/login";
 import styles from "../auth-layout.css?inline";
 
 export const useLogin = routeAction$(
-  ( data, { redirect } ) => {
+  async ( data, { redirect } ) => {
+    const user = await getUserFromCredentials(data);
+    
+    if (user) {
+      
 
-    console.log(getUser());
-
-    if (isLoggedIn()) {
-      redirect(301, "/");
-    } else {
-      const prisma = new PrismaClient();
-      const userData = prisma.user.findUnique({
-        where: {
-          username: data.username,
-        },
-        select: {
-          id: true,
-          username: true,
-          name: true,
-          lastname: true,
-          email: true,
-        }
-      });
-
-      prisma.$disconnect();
-      setUser(userData);
       redirect(301, "/");
     }
   },
@@ -40,23 +22,7 @@ export const useLogin = routeAction$(
       username: z.string().nonempty(),
       password: z.string().min(8),
     }).refine(async (data) => {
-      const prisma = new PrismaClient();
-      const userPassword = await prisma.user.findUnique({
-        where: {
-          username: data.username.toString(),
-        },
-        select: {
-          password: true,
-        }
-      });
-
-      if (!userPassword) {
-        return false;
-      }
-      
-      prisma.$disconnect();
-
-      return bcrypt.compareSync(data.password.toString(), userPassword.password);
+      return getUserFromCredentials(data);
     }, { message: "Usuario o contraseña incorrectos" });
   })
 );
@@ -64,17 +30,6 @@ export const useLogin = routeAction$(
 export default component$(() => {
   const loginAction = useLogin();
   useStylesScoped$(styles);
-
-  //TODO: Not being able to show all the errors reported by zod.
-  //TODO: loginAction.value?.formErrors has the refined errors
-  //TODO: but loginAction.value?.fieldErrors has the basic validation errors
-  //TODO:
-  //TODO: A possible solution to this, is create the form from an object, and then 
-  //TODO: iterate over the object to show the errors under the field itself.
-  //TODO:
-  //TODO: Instead of creating a success message, we should redirect to the home page
-  //TODO: and in the header, should disappear the login and register buttons, and show
-  //TODO: new menu items, a button to go to the user profile, and a button to logout.
 
   return (
     <>

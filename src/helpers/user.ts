@@ -1,24 +1,32 @@
-import { isBrowser } from '@builder.io/qwik/build';
+import { PrismaClient } from '@prisma/client';
+import bcrypt from 'bcrypt';
 
-export const getUser = () => {
-    if (isBrowser) {
-        return JSON.parse(localStorage.getItem("user") ?? '');
-    }
-};
+import { type CredentialsProps } from '~/interfaces';
 
-export const setUser = (data: object )  => {
-    if (isBrowser) {
-        localStorage.setItem("user", JSON.stringify(data));
-        return true;
-    }
+export const getUserFromCredentials = async (credentials: CredentialsProps) => {
+    const prisma = new PrismaClient();
+    const user = await prisma.user.findUnique({
+        where: {
+            username: credentials.username.toLowerCase(),
+        },
+        select: {
+            username: true,
+            name: true,
+            lastname: true,
+            email: true,
+            password: true,
+        },
+    });
 
-    return false;
+    prisma.$disconnect();
+    const { password, ...userWithoutPassword } = user || {};
+
+    return ((password && credentials.password) 
+        && bcrypt.compareSync(credentials.password, password)) 
+        ? userWithoutPassword 
+        : null;
 };
 
 export const isLoggedIn = () => {
-    if (isBrowser) {
-        return (localStorage.getItem("user")) ? true : false;
-    }
-
-    return false;
+    return true;
 }
