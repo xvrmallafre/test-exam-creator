@@ -1,8 +1,10 @@
 import { component$, useSignal, useStore, useStylesScoped$, useTask$ } from "@builder.io/qwik";
+import { useLocation } from "@builder.io/qwik-city";
 
 import { useAuthSignin } from '~/routes/plugin@auth';
 
 import styles from './auth.css?inline';
+import { Loader } from "../icons/loader";
 
 interface LoginFormProps {
     formAction: any;
@@ -11,6 +13,7 @@ interface LoginFormProps {
 export const LoginForm = component$(({ formAction }: LoginFormProps) => {
 
     useStylesScoped$(styles);
+    const location = useLocation();
 
     const signin = useAuthSignin();
     const inputData = useStore({
@@ -29,6 +32,9 @@ export const LoginForm = component$(({ formAction }: LoginFormProps) => {
 
     return (
         <form class="login-form" method="POST">
+            <div class="relative">
+                {location.isNavigating && <div class="loader"><Loader /></div>}
+            </div>
             <div class="relative">
                 <input 
                     class={(isError.value ? ' error' : '')}
@@ -53,6 +59,7 @@ export const LoginForm = component$(({ formAction }: LoginFormProps) => {
             </div>
             <div class="relative">
                 <button 
+                    class="submit-button"
                     preventdefault:click
                     onClick$={async () => {
                         const user = await formAction.submit({
@@ -71,7 +78,7 @@ export const LoginForm = component$(({ formAction }: LoginFormProps) => {
                             });
                         }
                     }} >
-                        Acceder
+                        {location.isNavigating ? <span><Loader width={16} /></span> : <span>Acceder</span> }
                     </button>
             </div>
             {isError.value && (

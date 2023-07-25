@@ -7,7 +7,7 @@ input.error {
 }
 
 button {
-    @apply bg-purple-500 text-white rounded-md px-2 py-3 w-full hover:bg-purple-700 transition-all mt-2;
+    @apply bg-purple-500 text-white rounded-md px-2 py-3 w-full hover:bg-purple-700 transition-all mt-2 focus-visible:border-0 focus:outline-1 focus:outline;
 }
 
 code {

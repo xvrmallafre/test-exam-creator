@@ -1,7 +1,7 @@
 import { component$, useStylesScoped$ } from "@builder.io/qwik";
 import { type DocumentHead, routeAction$, zod$ } from "@builder.io/qwik-city";
 
-//import { useAuthSignin } from '~/routes/plugin@auth';
+//TODO: implement useAuthSession
 
 import { getUserFromCredentials } from "~/helpers/user";
 import { LoginForm } from "~/components/account/login";
@@ -38,16 +38,6 @@ export default component$(() => {
             <div class="login-content">
                 <LoginForm formAction={loginAction} />
             </div>
-            {/* {loginAction.status === 200 && (
-              <div class="message success">
-                <h3>Sesión iniciada satisfactoriamente!</h3>
-              </div>
-            )}
-            {loginAction.status === 400 && (
-              <div class="message error">
-                <h3>{loginAction.value?.formErrors}</h3>
-              </div>
-            )} */}
         </div>
     </>
   );
