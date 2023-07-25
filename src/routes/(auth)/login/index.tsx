@@ -8,13 +8,11 @@ import { LoginForm } from "~/components/account/login";
 import styles from "../auth-layout.css?inline";
 
 export const useLogin = routeAction$(
-  async ( data, { redirect } ) => {
+  async ( data ) => {
     const user = await getUserFromCredentials(data);
-    
-    if (user) {
-      
 
-      redirect(301, "/");
+    if (user) {
+      console.log("usuario", user);
     }
   },
   zod$((z) => {
@@ -40,7 +38,7 @@ export default component$(() => {
             <div class="login-content">
                 <LoginForm formAction={loginAction} />
             </div>
-            {loginAction.status === 200 && (
+            {/* {loginAction.status === 200 && (
               <div class="message success">
                 <h3>Sesión iniciada satisfactoriamente!</h3>
               </div>
@@ -49,7 +47,7 @@ export default component$(() => {
               <div class="message error">
                 <h3>{loginAction.value?.formErrors}</h3>
               </div>
-            )}
+            )} */}
         </div>
     </>
   );

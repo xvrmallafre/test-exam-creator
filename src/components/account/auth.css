@@ -3,11 +3,11 @@ input {
 }
 
 input.error {
-    @apply border-red-500 text-red-400;
+    @apply border-red-500 text-red-400 placeholder:text-red-400;
 }
 
 button {
-    @apply bg-purple-500 text-white rounded-md px-2 py-1 w-full hover:bg-purple-700 transition-all;
+    @apply bg-purple-500 text-white rounded-md px-2 py-3 w-full hover:bg-purple-700 transition-all mt-2;
 }
 
 code {
@@ -15,11 +15,7 @@ code {
 }
 
 .login-form, .register-form {
-    @apply py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7;
-}
-
-.not-valid {
-    @apply border-red-500 text-red-400;
+    @apply py-2 text-base leading-4 space-y-4 text-gray-700;
 }
 
 .error span {
@@ -29,3 +25,11 @@ code {
 .relative input {
     @apply m-0 mt-2;
 }
+
+.message.success h3 {
+    @apply text-sm text-green-500;
+}
+
+.message.error h3 {
+    @apply text-sm text-red-500;
+}	

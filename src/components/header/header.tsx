@@ -33,21 +33,7 @@ export default component$(() => {
                   </a>
                 </li>
               </ul>
-          ))}
-          {/* {(isLoggedIn && (
-              <ul>
-                <li><code>{user}</code></li>
-                <li>
-                  <span class="text-base">Hola {user?.name}</span>
-                </li>
-                <li>
-                  <a href="/logout/">
-                    Cerrar sesión
-                  </a>
-                </li>
-              </ul>
-          ))} */}
-          
+          ))}  
       </div>
     </header>
   );

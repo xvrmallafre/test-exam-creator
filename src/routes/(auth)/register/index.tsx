@@ -3,7 +3,6 @@ import { type DocumentHead, routeAction$, zod$ } from "@builder.io/qwik-city";
 
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
-import { Auth } from "@auth/core";
 
 import { RegisterForm } from "~/components/account/register";
 import styles from "../auth-layout.css?inline";

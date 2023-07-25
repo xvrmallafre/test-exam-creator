@@ -29,7 +29,7 @@ export const RegisterForm = component$(({ formAction }: RegisterFormProps) => {
                 )}
             </div>
             <div class="relative">
-                <input class={(errorLastname) ? 'erorr ' : ''} id="lastname" type="text" name="lastname" placeholder="Apellidos" autoComplete={"lastname"}/>
+                <input class={(errorLastname) ? 'error ' : ''} id="lastname" type="text" name="lastname" placeholder="Apellidos" autoComplete={"lastname"}/>
                 {errorLastname && (
                     <div class="error">
                         <span>{formAction.value?.fieldErrors.lastname}</span>
