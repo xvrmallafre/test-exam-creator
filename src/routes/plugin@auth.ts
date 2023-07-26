@@ -12,10 +12,10 @@ export const { onRequest, useAuthSession, useAuthSignin, useAuthSignout } =
     providers: [
       Credentials({
         async authorize(credentials): Promise<any> {
-          if (credentials?.username && credentials?.password) {
+          if (credentials.username && credentials.password) {
             const userCredentials = {
-              username: credentials!.username!.toString(),
-              password: credentials!.password!.toString(),
+              username: credentials.username.toString(),
+              password: credentials.password.toString(),
             };
 
             return await getUserFromCredentials(userCredentials);
