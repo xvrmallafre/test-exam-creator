@@ -1,8 +1,16 @@
 import { component$ } from "@builder.io/qwik";
+
+import { useAuthSession } from "~/routes/plugin@auth";
+
+import { LoggedInMenu } from "./menu/loggedin";
+import { NotLoggedInMenu } from "./menu/notloggedin";
+
 import { QwikLogo } from "../icons/qwik";
 import styles from "./header.module.css";
 
 export default component$(() => {
+  const session = useAuthSession();
+
  return (
     <header class={styles.header}>
       <div class={["container", styles.wrapper]}>
@@ -11,29 +19,7 @@ export default component$(() => {
             <QwikLogo width={90} />
           </a>
         </div>
-        
-          {(true && (
-              <ul>
-                <li>
-                  <a href="/login/">
-                    Iniciar sesión
-                  </a>
-                </li>
-                <li>
-                  <a href="/register/">
-                    Registrarse
-                  </a>
-                </li>
-                <li> {/* 
-                  //TODO: This is only to test if the logout funciont works
-                  //TODO: Only will appear in the logged in section to users be able to logout
-                */}
-                  <a href="/logout/">
-                    Cerrar sesión
-                  </a>
-                </li>
-              </ul>
-          ))}  
+        {(session.value?.user ? <LoggedInMenu /> : <NotLoggedInMenu /> )}  
       </div>
     </header>
   );

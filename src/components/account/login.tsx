@@ -33,15 +33,12 @@ export const LoginForm = component$(({ formAction }: LoginFormProps) => {
     return (
         <form class="login-form" method="POST">
             <div class="relative">
-                {location.isNavigating && <div class="loader"><Loader /></div>}
-            </div>
-            <div class="relative">
                 <input 
                     class={(isError.value ? ' error' : '')}
                     type="text" 
                     name="username"
                     placeholder="Usuario" 
-                    autoComplete="username"
+                    autoComplete=""
                     onInput$={(e) => {
                         inputData.username = (e.target as HTMLInputElement).value;
                     }} />
@@ -77,7 +74,8 @@ export const LoginForm = component$(({ formAction }: LoginFormProps) => {
                                 }
                             });
                         }
-                    }} >
+                    }} 
+                    disabled={location.isNavigating} >
                         {location.isNavigating ? <span><Loader width={16} /></span> : <span>Acceder</span> }
                     </button>
             </div>
