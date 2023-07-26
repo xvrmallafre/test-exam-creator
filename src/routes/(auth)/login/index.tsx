@@ -9,11 +9,7 @@ import styles from "../auth-layout.css?inline";
 
 export const useLogin = routeAction$(
   async ( data ) => {
-    const user = await getUserFromCredentials(data);
-
-    if (user) {
-      console.log("usuario", user);
-    }
+    return await getUserFromCredentials(data);
   },
   zod$((z) => {
     return z.object({

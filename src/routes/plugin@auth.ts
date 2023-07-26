@@ -29,7 +29,6 @@ export const { onRequest, useAuthSession, useAuthSignin, useAuthSignout } =
       })
     ] as Provider[],
     pages: {
-      signIn: "/login/",
-      signOut: "/",
+      signIn: "/login/"
     }
   }));
