@@ -3,6 +3,7 @@ import type { Provider } from "@auth/core/providers";
 import Credentials from "@auth/core/providers/credentials";
 
 import { getUserFromCredentials } from "../helpers/user";
+import type { UserSessionInterface } from "~/interfaces";
 
 export const { onRequest, useAuthSession, useAuthSignin, useAuthSignout } =
   serverAuth$(({ env }) => ({
@@ -30,5 +31,17 @@ export const { onRequest, useAuthSession, useAuthSignin, useAuthSignout } =
     ] as Provider[],
     pages: {
       signIn: "/login/"
+    },
+    callbacks: {
+      session({ session, token }) {
+        session.user = token.user as UserSessionInterface;
+        return session;
+      },
+      jwt({ token, user }) {
+        if (user) {
+          token.user = user;
+        }
+        return token;
+      },
     }
   }));

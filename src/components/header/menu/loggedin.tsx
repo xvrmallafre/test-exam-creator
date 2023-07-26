@@ -2,6 +2,7 @@ import { component$, useStylesScoped$ } from '@builder.io/qwik';
 
 import { useAuthSession, useAuthSignout } from '~/routes/plugin@auth';
 
+import { type UserSessionInterface } from '~/interfaces' 
 import styles from './menu.css?inline';
 
 export const LoggedInMenu = component$(() => {
@@ -9,12 +10,12 @@ export const LoggedInMenu = component$(() => {
 
     const session = useAuthSession();
     const signout = useAuthSignout();
-    const user = session.value?.user;
+    const user = session.value?.user as UserSessionInterface;
     
     return (
         <ul>
             <li>
-                <span class="welcome-message">{`Hola ${user?.name}`}</span>
+                <span class="welcome-message">{`Hola ${user.name}`}</span>
             </li>
             <li>
                 <span
