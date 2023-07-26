@@ -3,7 +3,7 @@ import { type DocumentHead, routeAction$, zod$ } from "@builder.io/qwik-city";
 
 //TODO: implement useAuthSession
 
-import { getUserFromCredentials } from "~/helpers/user";
+import { getUserFromCredentials } from "~/models/user";
 import { LoginForm } from "~/components/account/login";
 import styles from "../auth-layout.css?inline";
 
