@@ -2,28 +2,17 @@ import { component$, useStylesScoped$ } from "@builder.io/qwik";
 import { type DocumentHead, routeAction$, zod$ } from "@builder.io/qwik-city";
 
 import { PrismaClient } from "@prisma/client";
-import bcrypt from "bcrypt";
 
+import { setNewUser } from "~/models/user";
 import { RegisterForm } from "~/components/account/register";
 import styles from "../auth-layout.css?inline";
 
 export const useCreateUser = routeAction$(
-  async (data, { redirect }) => {
-    const prisma = new PrismaClient();
-    const hashedPassword = bcrypt.hashSync(data.password, 5);
-    await prisma.user.create({
-      data: {
-        name: data.name.trim(),
-        lastname: data.lastname?.trim(),
-        username: data.username.toLowerCase(),
-        email: data.email.trim(),
-        password: hashedPassword,
-      }
-    });
-
-    prisma.$disconnect();
-
-    redirect(301, "/");
+  async (data) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { passwordConfirmation, ...userData } = data;
+    
+    return await setNewUser(userData);
   },
   zod$((z) => {
     return z.object({
@@ -34,6 +23,9 @@ export const useCreateUser = routeAction$(
         const user = await prisma.user.findUnique({
           where: {
             username: field.toLowerCase()
+          },
+          select: {
+            username: true
           }
         });
   

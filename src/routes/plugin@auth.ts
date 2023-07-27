@@ -3,7 +3,7 @@ import type { Provider } from "@auth/core/providers";
 import Credentials from "@auth/core/providers/credentials";
 
 import { getUserFromCredentials } from "../models/user";
-import type { UserSessionInterface } from "~/interfaces";
+import type { SessionUserInterface } from "~/interfaces";
 
 export const { onRequest, useAuthSession, useAuthSignin, useAuthSignout } =
   serverAuth$(({ env }) => ({
@@ -34,7 +34,7 @@ export const { onRequest, useAuthSession, useAuthSignin, useAuthSignout } =
     },
     callbacks: {
       session({ session, token }) {
-        session.user = token.user as UserSessionInterface;
+        session.user = token.user as SessionUserInterface;
         return session;
       },
       jwt({ token, user }) {

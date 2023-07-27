@@ -1,9 +1,35 @@
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcrypt';
 
-import type { CredentialsProps, UserInterface } from '~/interfaces';
+import { hashPassword, getBasicUserFromCompleteUser } from '~/helpers/user';
+import type { CredentialsUserProps, BasicUserInterface, CreateUserInterface, CompleteUserInterface } from '~/interfaces';
 
-export const getUserFromCredentials = async (credentials: CredentialsProps) => {
+export const setNewUser = async (user: CreateUserInterface): Promise<BasicUserInterface | null> => {
+    const prisma = new PrismaClient();
+    let newUser = null;
+
+    try {
+        newUser = await prisma.user.create({
+            data: {
+                ...user,
+                username: user.username.toLowerCase(),
+                password: hashPassword(user.password),
+            }
+        });
+    } catch (error) {
+        //TODO: Save error in a log file
+        console.log(error);
+        return null;
+    }
+
+    console.log(newUser);
+
+    prisma.$disconnect();
+
+    return getBasicUserFromCompleteUser(newUser as CompleteUserInterface);
+}
+
+export const getUserFromCredentials = async (credentials: CredentialsUserProps): Promise<BasicUserInterface | null> => {
     const prisma = new PrismaClient();
     const user = await prisma.user.findUnique({
         where: {
@@ -24,11 +50,11 @@ export const getUserFromCredentials = async (credentials: CredentialsProps) => {
 
     return ((password && credentials.password) 
         && bcrypt.compareSync(credentials.password, password)) 
-        ? userWithoutPassword 
+        ? userWithoutPassword as BasicUserInterface
         : null;
 };
 
-export const getUserFromId = async (id: string): Promise<UserInterface> => {
+export const getUserFromId = async (id: string): Promise<CompleteUserInterface> => {
     const prisma = new PrismaClient();
     const user = await prisma.user.findUnique({
         where: {
@@ -37,5 +63,6 @@ export const getUserFromId = async (id: string): Promise<UserInterface> => {
     });
 
     prisma.$disconnect();
-    return user as UserInterface;
+
+    return user as CompleteUserInterface;
 }

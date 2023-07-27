@@ -1,8 +1,6 @@
 import { component$, useStylesScoped$ } from "@builder.io/qwik";
 import { type DocumentHead, routeAction$, zod$ } from "@builder.io/qwik-city";
 
-//TODO: implement useAuthSession
-
 import { getUserFromCredentials } from "~/models/user";
 import { LoginForm } from "~/components/account/login";
 import styles from "../auth-layout.css?inline";
@@ -16,7 +14,7 @@ export const useLogin = routeAction$(
       username: z.string().nonempty(),
       password: z.string().min(8),
     }).refine(async (data) => {
-      return getUserFromCredentials(data);
+      return await getUserFromCredentials(data);
     }, { message: "Usuario o contraseña incorrectos" });
   })
 );
