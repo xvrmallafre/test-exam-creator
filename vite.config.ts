@@ -5,7 +5,14 @@ import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig(() => {
   return {
-    plugins: [qwikCity(), qwikVite({
+    plugins: [qwikCity({
+      mdxPlugins: {
+        remarkGfm: false,
+        rehypeSyntaxHighlight: false,
+        rehypeAutolinkHeadings: false,
+      },
+      trailingSlash: false
+    }), qwikVite({
       devTools: {
         clickToSource: false,
       },
