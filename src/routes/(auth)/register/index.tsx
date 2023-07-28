@@ -68,6 +68,7 @@ export default component$(() => {
       </div>
       <div class="login-content">
         <RegisterForm formAction={createUserAction} />
+        {/* TODO: Refactor this section */}
         {createUserAction.status === 200 && (
           <div class="message success">
             <h3>Usuario creado satisfactoriamente!</h3>

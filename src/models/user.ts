@@ -22,8 +22,6 @@ export const setNewUser = async (user: CreateUserInterface): Promise<BasicUserIn
         return null;
     }
 
-    console.log(newUser);
-
     prisma.$disconnect();
 
     return getBasicUserFromCompleteUser(newUser as CompleteUserInterface);
@@ -48,7 +46,7 @@ export const getUserFromCredentials = async (credentials: CredentialsUserProps):
     prisma.$disconnect();
     const { password, ...userWithoutPassword } = user || {};
 
-    return ((password && credentials.password) 
+    return ((password && credentials.password)
         && bcrypt.compareSync(credentials.password, password)) 
         ? userWithoutPassword as BasicUserInterface
         : null;

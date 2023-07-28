@@ -11,16 +11,16 @@ datasource db {
 }
 
 model User {
-  id           String    @id @default(auto()) @map("_id") @db.ObjectId
-  email        String    @unique
-  username     String    @unique
-  password     String
-  role         Role      @default(USER)
-  status       Status    @default(ACTIVE)
-  name         String
-  lastname     String?
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  email     String   @unique
+  username  String   @unique
+  password  String
+  role      Role     @default(USER)
+  status    Status   @default(ACTIVE)
+  name      String
+  lastname  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 enum Role {
@@ -32,4 +32,13 @@ enum Status {
   ACTIVE
   PENDING
   INACTIVE
+}
+
+model Exam {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  description String?
+  questions   Json[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
