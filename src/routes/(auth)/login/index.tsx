@@ -2,7 +2,7 @@ import { component$, useStylesScoped$ } from "@builder.io/qwik";
 import { type DocumentHead, routeAction$, zod$ } from "@builder.io/qwik-city";
 
 import { getUserFromCredentials } from "~/models/user";
-import { LoginForm } from "~/components/account/login";
+import { LoginForm } from "~/components/auth/login";
 import styles from "../auth-layout.css?inline";
 
 export const useLogin = routeAction$(

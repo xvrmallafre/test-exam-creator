@@ -4,7 +4,7 @@ import { type DocumentHead, routeAction$, zod$ } from "@builder.io/qwik-city";
 import { PrismaClient } from "@prisma/client";
 
 import { setNewUser } from "~/models/user";
-import { RegisterForm } from "~/components/account/register";
+import { RegisterForm } from "~/components/auth/register";
 import styles from "../auth-layout.css?inline";
 
 export const useCreateUser = routeAction$(
