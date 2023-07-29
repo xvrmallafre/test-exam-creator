@@ -9,6 +9,8 @@ interface RegisterFormProps {
 
 export const RegisterForm = component$(({ formAction }: RegisterFormProps) => {
 
+    console.log(formAction);
+
     //TODO: Refactor this file to implement here the submit action to allow login after registration
 
     const errorName = (formAction.value?.fieldErrors?.name);

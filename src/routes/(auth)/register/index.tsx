@@ -53,7 +53,7 @@ export const useCreateUser = routeAction$(
           path: ["passwordConfirmation"]
         })
       }
-    })
+    });
   })
 );
 

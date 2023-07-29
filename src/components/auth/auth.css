@@ -1,5 +1,10 @@
 input {
-    @apply mb-3 focus:placeholder-transparent placeholder-gray-400 h-10 w-full border-b-2 border-gray-300 text-gray-600 focus:outline-none focus:border-purple-400 transition-all text-base bg-white;
+    @apply mb-3 focus:placeholder-transparent placeholder-gray-400 h-10 w-full border-b-2 border-gray-300 text-gray-600 focus:outline-none transition-all text-base bg-white;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+transition: background-color 600000s 0s, color 600000s 0s;
 }
 
 input.error {
@@ -7,7 +12,7 @@ input.error {
 }
 
 button {
-    @apply bg-purple-500 text-white rounded-md px-2 py-3 w-full hover:bg-purple-700 transition-all mt-2 focus-visible:border-0 focus:outline-1 focus:outline;
+    @apply bg-primary text-white rounded-md px-2 py-3 w-full hover:bg-primary-focus transition-all mt-2 focus-visible:border-0 focus:outline-1 focus:outline;
 }
 
 code {
@@ -24,10 +29,6 @@ code {
 
 .relative input {
     @apply m-0 mt-2;
-}
-
-.message.success h3 {
-    @apply text-sm text-green-500;
 }
 
 .message.error h3 {

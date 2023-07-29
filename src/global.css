@@ -56,8 +56,20 @@ body {
   overflow-x: hidden;
 }
 
-/* .container {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 15px 20px;
-} */
+.from-neutral {
+  --tw-bg-opacity: 1;
+  --tw-neutral-color: hsl(var(--n) / var(--tw-bg-opacity));
+
+  --tw-gradient-from: var(--tw-neutral-color) var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(216 180 254 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.to-primary {
+  --tw-bg-opacity: 1;
+  --tw-primary-color: hsl(var(--p) / var(--tw-bg-opacity));
+
+  --tw-gradient-from: var(--tw-primary-color) var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(216 180 254 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
