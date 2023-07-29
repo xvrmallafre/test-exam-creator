@@ -1,5 +1,5 @@
 input {
-    @apply mb-3 focus:placeholder-transparent placeholder-gray-400 h-10 w-full border-b-2 border-gray-300 text-gray-600 focus:outline-none focus:border-purple-400 transition-all text-base;
+    @apply mb-3 focus:placeholder-transparent placeholder-gray-400 h-10 w-full border-b-2 border-gray-300 text-gray-600 focus:outline-none focus:border-purple-400 transition-all text-base bg-white;
 }
 
 input.error {

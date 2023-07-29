@@ -27,7 +27,7 @@ export default component$(() => {
     <>
         <div class="max-w-md mx-auto">
             <div>
-                <h1 class="login-title">Login Form</h1>
+                <h1 class="login-title">Inicia sesión</h1>
             </div>
             <div class="login-content">
                 <LoginForm formAction={loginAction} />

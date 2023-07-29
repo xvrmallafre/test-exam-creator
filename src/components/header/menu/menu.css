@@ -1,19 +1,4 @@
-ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: flex;
-    gap: 30px;
-}
-
-li {
-    display: none;
-    margin: 0;
-    padding: 0;
-    font-size: 0.7rem;
-}
-
-li a, li .welcome-message, li .logout-button {
+li .welcome-message, li .logout-button {
     color: white;
     display: inline-block;
     padding: 0;
@@ -23,14 +8,4 @@ li a, li .welcome-message, li .logout-button {
 
 li .logout-button {
     cursor: pointer;
-}
-
-li a:hover, li .logout-button:hover {
-    color: var(--qwik-light-blue);
-}
-
-@media (min-width: 450px) {
-    li {
-        display: inline-block;
-    }
 }
