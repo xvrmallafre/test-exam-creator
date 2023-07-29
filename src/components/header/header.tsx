@@ -4,6 +4,7 @@ import { useAuthSession } from "~/routes/plugin@auth";
 
 import { LoggedInMenu } from "./menu/loggedin";
 import { NotLoggedInMenu } from "./menu/notloggedin";
+import {} from "~/components/themeChanger/themeChanger";
 
 import styles from "./header.css?inline";
 
@@ -17,7 +18,8 @@ export default component$(() => {
         <a class="uppercase text-xl ml-4" href="/">ExamenListo</a>
       </div>
       <div class="flex-none">
-        {(session.value?.user ? <LoggedInMenu /> : <NotLoggedInMenu /> )}  
+
+        {(session.value?.user ? <LoggedInMenu /> : <NotLoggedInMenu /> )}
       </div>
     </div>
   );

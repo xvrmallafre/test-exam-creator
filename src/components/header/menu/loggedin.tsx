@@ -4,7 +4,7 @@ import { useAuthSession, useAuthSignout } from '~/routes/plugin@auth';
 
 import type { SessionUserInterface } from '~/interfaces';
 import styles from './menu.css?inline';
-import { Profile } from '~/components/icons/profile';
+import { Profile, ExamA } from '~/components/icons';
 
 export const LoggedInMenu = component$(() => {
     useStylesScoped$(styles);
@@ -14,6 +14,16 @@ export const LoggedInMenu = component$(() => {
     const user = session.value?.user as SessionUserInterface;
     
     return (<>
+        <div class="dropdown dropdown-end">
+          <label tabIndex={0} class="btn btn-ghost rounded" title={'Perfil'}>
+            <span class="indicator"><ExamA /></span>
+            <span>Mis exámenes</span>
+          </label>
+          <ul tabIndex={0} class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-neutral rounded min-w-max text-right">
+            <li class="items-end"><a href={'/exam/'}>Ver exámenes</a></li>
+            <li class="items-end"><a href={'/account/'}>Crear examen</a></li>
+          </ul>
+        </div>
         <div class="dropdown dropdown-end">
           <label tabIndex={0} class="btn btn-ghost rounded" title={'Perfil'}>
             <span class="indicator"><Profile /></span>
