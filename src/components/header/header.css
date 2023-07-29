@@ -1,0 +1,3 @@
+.navbar {
+  @apply 2xl:px-52 xl:px-40 lg:px-28 md:px-16 px-4;
+}
