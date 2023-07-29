@@ -15,39 +15,22 @@ export const LoggedInMenu = component$(() => {
     
     return (<>
         <div class="dropdown dropdown-end">
-          <div>
-            <span class="uppercase text-l ml-4">{`Hola ${user.name}`}</span>
-          </div>
           <label tabIndex={0} class="btn btn-ghost rounded" title={'Perfil'}>
-            <a class="indicator" href='/account/'>
-                <Profile />
-              {/* <span class="badge badge-sm indicator-item">8</span> */}
-            </a>
-            <span>Perfil</span>
+            <span class="indicator"><Profile /></span>
+            <span>{`${user.username}`}</span>
           </label>
-          <ul tabIndex={0} class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-gray-800 rounded w-40 text-right">
-            <li class="items-end"><a href={'/login/'}>Iniciar Sesion{/* <span class="badge">New</span> */}</a></li>
-            <li class="items-end"><a href={'/register/'}>Registrarse</a></li>
-          </ul>
-        </div>
-    </> );
-
-    return (
-        <ul>
-            <li>
-                <span class="welcome-message">{`Hola ${user.name}`}</span>
-            </li>
-            <li>
-                <span
-                    class="logout-button"
-                    onClick$={async () => {
+          <ul tabIndex={0} class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-neutral rounded min-w-max text-right">
+            <li class="items-end"><a href={'/account/'}>Ver perfil</a></li>
+            <li class="items-end">
+                <span onClick$={async () => {
                         await signout.submit({
                             callbackUrl: '/',
                         });
                     }}>
                     Cerrar sesión
-                </span>
+                </span>  
             </li>
-        </ul>
-    );
+          </ul>
+        </div>
+    </> );
 });
