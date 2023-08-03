@@ -21,7 +21,7 @@ export const LoggedInMenu = component$(() => {
           </label>
           <ul tabIndex={0} class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-neutral rounded min-w-max text-right">
             <li class="items-end"><a href={'/exam/'}>Ver exámenes</a></li>
-            <li class="items-end"><a href={'/account/'}>Crear examen</a></li>
+            <li class="items-end"><a href={'/exam/create/'}>Crear examen</a></li>
           </ul>
         </div>
         <div class="dropdown dropdown-end">
