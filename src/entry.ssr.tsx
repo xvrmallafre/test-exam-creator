@@ -24,7 +24,6 @@ export default function (opts: RenderToStreamOptions) {
     // Use container attributes to set attributes on the html tag.
     containerAttributes: {
       lang: "es",
-      "data-theme": "forest",
       ...opts.containerAttributes,
     },
   });

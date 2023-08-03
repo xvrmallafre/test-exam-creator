@@ -1,6 +1,5 @@
-import { component$, Slot, useStyles$ } from "@builder.io/qwik";
-import { routeLoader$ } from "@builder.io/qwik-city";
-import type { RequestHandler } from "@builder.io/qwik-city";
+import { component$, type Signal, Slot, useSignal, useStyles$ } from "@builder.io/qwik";
+import { type RequestHandler } from "@builder.io/qwik-city";
 
 import Header from "~/components/header/header";
 import Footer from "~/components/footer/footer";
@@ -18,17 +17,13 @@ export const onGet: RequestHandler = async ({ cacheControl }) => {
   });
 };
 
-export const useServerTimeLoader = routeLoader$(() => {
-  return {
-    date: new Date().toISOString(),
-  };
-});
-
 export default component$(() => {
   useStyles$(styles);
+  const theme: Signal<string> = useSignal("forest");
+
   return (
     <>
-      <Header />
+      <Header theme={ theme } />
       <main>
         <Slot />
       </main>

@@ -4,6 +4,7 @@ import { type DocumentHead, routeAction$, zod$ } from "@builder.io/qwik-city";
 import { PrismaClient } from "@prisma/client";
 
 import { setNewUser } from "~/models/user";
+import "~/helpers/i18n-zod";
 import { RegisterForm } from "~/components/auth/register";
 import styles from "../auth-layout.css?inline";
 
@@ -32,7 +33,7 @@ export const useCreateUser = routeAction$(
         prisma.$disconnect();
         return !user;
       }, { message: "El nombre de usuario ya existe" }),
-      email: z.string().email().nonempty().refine(async (field) => {
+      email: z.string().nonempty().email().refine(async (field) => {
         const prisma = new PrismaClient();
         const user = await prisma.user.findUnique({
           where: {

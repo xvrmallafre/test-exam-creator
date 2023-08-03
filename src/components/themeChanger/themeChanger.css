@@ -1,0 +1,29 @@
+button .theme-leaf, button .theme-pantone {
+  stroke: currentColor;
+  fill: none; 
+}
+
+button .theme-snowflake, button .theme-sun, button .theme-moon {
+  stroke: none;
+  fill: currentColor; 
+}
+
+button.theme-changer:hover .theme-leaf {
+  stroke: #21ad17;
+  fill: none;
+}
+
+button.theme-changer:hover .theme-snowflake {
+  stroke: none;
+  fill: #097dab;
+}
+
+button.theme-changer:hover .theme-sun {
+  stroke: none;
+  fill: #fffb25;
+}
+
+button.theme-changer:hover .theme-moon {
+  stroke: none;
+  fill: #ffffff;
+}

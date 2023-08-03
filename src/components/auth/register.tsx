@@ -1,5 +1,7 @@
 import { component$, useStylesScoped$ } from "@builder.io/qwik";
-import { Form } from "@builder.io/qwik-city";
+import { Form, useLocation } from "@builder.io/qwik-city";
+
+import { capitalizeFirstLetter } from "~/helpers/textProcessor";
 
 import styles from './auth.css?inline';
 
@@ -8,9 +10,9 @@ interface RegisterFormProps {
 }
 
 export const RegisterForm = component$(({ formAction }: RegisterFormProps) => {
-
-    console.log(formAction);
-
+    const location = useLocation();
+    useStylesScoped$(styles);
+    
     //TODO: Refactor this file to implement here the submit action to allow login after registration
 
     const errorName = (formAction.value?.fieldErrors?.name);
@@ -20,7 +22,6 @@ export const RegisterForm = component$(({ formAction }: RegisterFormProps) => {
     const errorPassword = (formAction.value?.fieldErrors?.password);
     const errorPasswordConfirmation = (formAction.value?.fieldErrors?.passwordConfirmation);
 
-    useStylesScoped$(styles);
 
     return (
         <Form class="register-form" action={formAction}>
@@ -52,7 +53,7 @@ export const RegisterForm = component$(({ formAction }: RegisterFormProps) => {
                 <input class={(errorEmail) ? 'error' : ''} id="email" name="email" type="text" placeholder="Correo electrónico" autoComplete={"email"}/>
                 {errorEmail && (
                     <div class="error">
-                        <span>{(formAction.value?.fieldErrors.email?.length > 1) ? formAction.value?.fieldErrors.email[0] : formAction.value?.fieldErrors.email}</span>
+                        <span>{(formAction.value?.fieldErrors.email?.length > 1) ? capitalizeFirstLetter(formAction.value?.fieldErrors.email[0]) : capitalizeFirstLetter(formAction.value?.fieldErrors.email)}</span>
                     </div>
                 )}
             </div>
@@ -73,7 +74,10 @@ export const RegisterForm = component$(({ formAction }: RegisterFormProps) => {
                 )}
             </div>
             <div class="relative">
-                <button type="submit">Crear perfil</button>
+                <button type="submit"
+                    disabled={location.isNavigating} >
+                    {location.isNavigating ? <span class="loading loading-spinner w-[16px]"></span> : <span>Acceder</span> }
+                </button>
             </div>
         </Form>
     )

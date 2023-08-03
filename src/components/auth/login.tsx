@@ -4,7 +4,6 @@ import { useLocation } from "@builder.io/qwik-city";
 import { useAuthSignin } from '~/routes/plugin@auth';
 
 import styles from './auth.css?inline';
-import { Loader } from "../icons/loader";
 
 interface LoginFormProps {
     formAction: any;
@@ -76,7 +75,7 @@ export const LoginForm = component$(({ formAction }: LoginFormProps) => {
                         }
                     }} 
                     disabled={location.isNavigating} >
-                        {location.isNavigating ? <span><Loader width={16} /></span> : <span>Acceder</span> }
+                        {location.isNavigating ? <span class="loading loading-spinner w-[16px]"></span> : <span>Acceder</span> }
                     </button>
             </div>
             {isError.value && (
