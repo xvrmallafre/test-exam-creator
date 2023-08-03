@@ -8,20 +8,28 @@ button .theme-snowflake, button .theme-sun, button .theme-moon {
   fill: currentColor; 
 }
 
+/* leaf.tsx */
+
 button.theme-changer:hover .theme-leaf {
   stroke: #21ad17;
   fill: none;
 }
+
+/* snowflake.tsx */
 
 button.theme-changer:hover .theme-snowflake {
   stroke: none;
   fill: #097dab;
 }
 
+/* sun.tsx */
+
 button.theme-changer:hover .theme-sun {
   stroke: none;
   fill: #fffb25;
 }
+
+/* moon.tsx */
 
 button.theme-changer:hover .theme-moon {
   stroke: none;

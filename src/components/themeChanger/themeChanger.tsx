@@ -29,7 +29,7 @@ export const ThemeChanger = component$<ThemeChangerProps>(({ theme }) => {
 
   return (
     <>
-      <button class="theme-changer btn btn-ghost rounded bg-transparent border-none hover:bg-transparent"
+      <button class="theme-changer btn btn-ghost rounded"
         onClick$={() => {
           switch (localStorage.getItem('theme')) {
             case 'forest':
