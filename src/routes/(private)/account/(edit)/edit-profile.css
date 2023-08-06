@@ -1,0 +1,23 @@
+.title {
+    @apply mb-10;
+}
+
+.two-cols {
+    @apply grid xl:grid-cols-2 xl:gap-6;
+}
+
+.form-control {
+    @apply relative z-0 mb-6 w-full;
+}
+
+.form-control input {
+    @apply w-full sm:w-56 block py-2.5 px-0 text-sm bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-primary-focus focus:outline-none focus:ring-0 focus:border-primary;
+}
+
+.form-control label {
+    @apply absolute text-sm text-gray-500 dark:text-gray-400 duration-300 scale-75 top-3 -z-10 origin-[0];
+}
+
+button[type="submit"] {
+    @apply text-white bg-primary hover:bg-primary-focus focus:ring-4 font-medium rounded-sm text-sm w-full sm:w-auto px-4 py-2 text-center;
+}

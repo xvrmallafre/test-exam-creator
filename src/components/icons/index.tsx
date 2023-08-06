@@ -9,3 +9,4 @@ export * from './leaf';
 export * from './sun';
 export * from './moon';
 export * from './pantone';
+export * from './menu';

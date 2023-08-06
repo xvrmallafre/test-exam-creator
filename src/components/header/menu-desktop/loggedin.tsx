@@ -1,13 +1,11 @@
-import { component$, useStylesScoped$ } from '@builder.io/qwik';
+import { component$ } from '@builder.io/qwik';
 
 import { useAuthSession, useAuthSignout } from '~/routes/plugin@auth';
 
 import type { SessionUserInterface } from '~/interfaces';
-import styles from './menu.css?inline';
 import { Profile, Exam } from '~/components/icons';
 
 export const LoggedInMenu = component$(() => {
-    useStylesScoped$(styles);
 
     const session = useAuthSession();
     const signout = useAuthSignout();

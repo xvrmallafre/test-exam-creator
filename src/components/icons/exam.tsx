@@ -5,7 +5,7 @@ export const Exam = ({
     width?: number;
     height?: number;
 }) => (
-    <svg version="1.1" width={`${width}px`} height={`${height}px`} viewBox="-1.9 1 15 15" xml:space="preserve">
+    <svg version="1.1" width={`${width}px`} height={`${height}px`} viewBox="-1 1 15 15" xml:space="preserve">
         <g transform="matrix(1 0 0 1 6.92 8.35)">
             <g>
                 <g transform="matrix(0.03 0 0 0.03 0 0)">

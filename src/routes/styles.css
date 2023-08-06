@@ -15,7 +15,7 @@ body {
 }
 
 main {
-  @apply py-6 flex flex-col justify-center sm:py-12;
+  @apply py-6 flex flex-col justify-center sm:py-12 2xl:px-52 xl:px-40 lg:px-28 md:px-16 px-4;
 }
 
 /* TAGS ----------------------------------------- */

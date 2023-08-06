@@ -2,6 +2,7 @@ import { component$, type Signal, Slot, useSignal, useStyles$ } from "@builder.i
 import { type RequestHandler } from "@builder.io/qwik-city";
 
 import Header from "~/components/header/header";
+import { MobileMenuDesktop } from "~/components/header/menu-mobile";
 import Footer from "~/components/footer/footer";
 
 import styles from "./styles.css?inline";
@@ -23,11 +24,20 @@ export default component$(() => {
 
   return (
     <>
-      <Header theme={ theme } />
-      <main>
-        <Slot />
-      </main>
-      <Footer />
+      <div class="drawer drawer-end">
+        <input id="menu-drawer" type="checkbox" class="drawer-toggle" />
+        <div class="drawer-content flex flex-col">
+          <Header theme={ theme } />
+            <main>
+            <Slot />
+          </main>
+          <Footer />
+        </div>
+        <div class="drawer-side">
+          <label for="menu-drawer" class="drawer-overlay"></label> 
+          <MobileMenuDesktop />
+        </div>
+      </div>
     </>
   );
 });

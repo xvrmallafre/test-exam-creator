@@ -19,7 +19,8 @@ export const CSSThemeScript = component$(() => {
     localStorage.setItem('theme', theme);
 } 
 
-  document.documentElement.setAttribute('data-theme', localStorage.getItem('theme'));
+  const lst = localStorage.getItem('theme');
+  document.documentElement.setAttribute('data-theme', lst);
   `;
   return <script dangerouslySetInnerHTML={themeScript} />;
 });

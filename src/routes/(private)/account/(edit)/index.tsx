@@ -1,19 +1,10 @@
-import { component$ } from '@builder.io/qwik';
+import { component$, useStylesScoped$ } from '@builder.io/qwik';
 import { routeAction$, type DocumentHead, Form, routeLoader$ } from '@builder.io/qwik-city';
 
-import { getUserFromId } from '~/models/user';
-import { getBasicUserFromCompleteUser } from '~/helpers/user';
+import styles from './edit-profile.css?inline';
 
 export const useGetUser = routeLoader$(async ({ sharedMap }) => {
-  const userId = sharedMap.get('session')?.user?.id;
-
-  if (!userId) {
-    return null;
-  }
-
-  const completeUser = await getUserFromId(userId);
-
-  return getBasicUserFromCompleteUser(completeUser);
+  return sharedMap.get('session')?.user;
 });
 
 export const useEditAccountAction = routeAction$(async (data) => {
@@ -24,76 +15,47 @@ export default component$(() => {
   const userData = useGetUser();
   const editAccountAction = useEditAccountAction();
 
+  useStylesScoped$(styles);
+
   return (
     <>
-        <div>
+        <div class="max-w-3xl mx-auto">
           <div class="title">
             <h2>Modifica tus datos de usuario</h2>
           </div>
-          <div class="form">
+          <div class="form text-center">
             <Form action={editAccountAction}>
-              {/* <div class="form-control">
-                <label for="name">Nombre</label>
-                <input type="text" name="name" id="name" value={userData.value?.name} />
+              <div class="two-cols">
+                <div class="form-control group">
+                  <input type="text" name="name" id="name" placeholder=" " class="peer" value={userData.value?.name} autoComplete={'none'} />
+                  <label for="name" class="transform -translate-y-6 peer-focus:left-0 peer-focus:text-neutral-content peer-focus:dark:text-neutral-content peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Nombre</label>
+                </div>
+                <div class="form-control group">
+                  <input type="text" name="lastname" id="lastname" placeholder=" " class="peer" value={userData.value?.lastname ?? ''} autoComplete={'none'} />
+                  <label for="lastname" class="transform -translate-y-6 peer-focus:left-0 peer-focus:text-neutral-content peer-focus:dark:text-neutral-content peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Apellidos</label>
+                </div>
               </div>
-              <div class="form-control">
-                <label for="lastname">Apellidos</label>
-                <input type="text" name="lastname" id="lastname" value={userData.value?.lastname ?? ''} />
+              <div class="two-cols">
+                <div class="form-control group">
+                  <input type="text" name="username" id="username" placeholder=" " class="peer" value={userData.value?.username} disabled autoComplete={'none'} />
+                  <label for="username" class="transform -translate-y-6 peer-focus:left-0 peer-focus:text-neutral-content peer-focus:dark:text-neutral-content peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Nombre de usuario</label>
+                </div>
+                <div class="form-control group">
+                  <input type="email" name="email" id="email" placeholder=" " class="peer" value={userData.value?.email} disabled autoComplete={'none'} />
+                  <label for="email" class="transform -translate-y-6 peer-focus:left-0 peer-focus:text-neutral-content peer-focus:dark:text-neutral-content peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Correo electrónico</label>
+                </div>
               </div>
-              <div class="form-control">
-                <label for="username">Nombre de usuario</label>
-                <input type="text" name="username" id="username" value={userData.value?.username} disabled/>
+              <div class="two-cols">
+                <div class="form-control group">
+                  <input type="password" name="password" id="password" placeholder=" " class="peer" autoComplete={'none'} />
+                  <label for="password" class="transform -translate-y-6 peer-focus:left-0 peer-focus:text-neutral-content peer-focus:dark:text-neutral-content peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Contraseña</label>
+                </div>
+                <div class="form-control group">
+                  <input type="password" name="passwordConfirmation" id="passwordConfirmation" placeholder=" " class="peer" autoComplete={'none'} />
+                  <label for="passwordConfirmation" class="transform -translate-y-6 peer-focus:left-0 peer-focus:text-neutral-content peer-focus:dark:text-neutral-content peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Repite la contraseña</label>
+                </div>
               </div>
-              <div class="form-control">
-                <label for="email">Correo electrónico</label>
-                <input type="email" name="email" id="email" value={userData.value?.email} disabled/>
-              </div>
-              <div class="form-control">
-                <label for="password">Contraseña</label>
-                <input type="password" name="password" id="password" value={''} />
-              </div>
-              <div class="form-control">
-                <label for="passwordConfirmation">Repite la contraseña</label>
-                <input type="password" name="passwordConfirmation" id="passwordConfirmation" value={''} />
-              </div>
-              <div class="form-control">
-                <button type="submit">Enviar</button>
-              </div> */}
-
-    <div class="relative z-0 mb-6 w-full group">
-			<input type="email" name="floating_email" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-			<label for="floating_email" class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email address</label>
-		</div>
-		<div class="relative z-0 mb-6 w-full group">
-			<input type="password" name="floating_password" id="floating_password" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-			<label for="floating_password" class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Password</label>
-		</div>
-		<div class="relative z-0 mb-6 w-full group">
-			<input type="password" name="repeat_password" id="floating_repeat_password" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-			<label for="floating_repeat_password" class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Confirm password</label>
-		</div>
-		<div class="grid xl:grid-cols-2 xl:gap-6">
-			<div class="relative z-0 mb-6 w-full group">
-				<input type="text" name="floating_first_name" id="floating_first_name" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-				<label for="floating_first_name" class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">First name</label>
-			</div>
-			<div class="relative z-0 mb-6 w-full group">
-				<input type="text" name="floating_last_name" id="floating_last_name" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-				<label for="floating_last_name" class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Last name</label>
-			</div>
-		</div>
-		<div class="grid xl:grid-cols-2 xl:gap-6">
-			<div class="relative z-0 mb-6 w-full group">
-				<input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" name="floating_phone" id="floating_phone" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-				<label for="floating_phone" class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Phone number (123-456-7890)</label>
-			</div>
-			<div class="relative z-0 mb-6 w-full group">
-				<input type="text" name="floating_company" id="floating_company" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-				<label for="floating_company" class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Company (Ex. Google)</label>
-			</div>
-		</div>
-		<button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
-
+              <button type="submit">Enviar</button>
             </Form>
           </div>
         </div>

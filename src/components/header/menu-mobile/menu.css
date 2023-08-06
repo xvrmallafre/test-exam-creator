@@ -1,0 +1,7 @@
+.menu :where(li ul) {
+    margin-left: 1.6rem;
+}
+
+.menu :where(li ul):before {
+    @apply bg-neutral-content;
+}
