@@ -11,7 +11,7 @@
 }
 
 .form-control input {
-    @apply w-full sm:w-56 block py-2.5 px-0 text-sm bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-primary-focus focus:outline-none focus:ring-0 focus:border-primary;
+    @apply w-72 block py-2.5 px-0 text-sm bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-primary-focus focus:outline-none focus:ring-0 focus:border-primary;
 }
 
 .form-control label {
